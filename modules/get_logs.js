@@ -1,5 +1,3 @@
-var connect = require('./dbConnect');
-const mongoose = require('mongoose');
 
 var Log       = require('../models/log.model');
 var get_access = require('./get_access');
@@ -8,22 +6,23 @@ var get_access = require('./get_access');
 var get_all_logs = function(username, callback){
 
   get_access.get_access(username, function(message, result, control){
-
+    var cleared = false;
     if (control){
       if (result[0].access === "admin" && result[0].status === "active"){
         Log.find()
         .exec()
         .then(function(doc){
-          callback(doc);
+          cleared = true;
+          callback(cleared, doc);
         })
         .catch(function(err){
-          callback(err);
+          callback(cleared, err);
         });
       }else{
-        callback({message: "User does not have access to the api"});
+        callback(cleared, {message: "User does not have access to the api"});
       }
     }else{
-      callback({message: message});
+      callback(cleared, {message: message});
     }
   });
 

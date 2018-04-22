@@ -20,4 +20,9 @@ class Database {
   }
 }
 
+var checkCon = function(callback) {
+  callback(mongoose.connection.readyState);
+};
+
 module.exports = new Database()
+module.exports.checkCon = checkCon;
