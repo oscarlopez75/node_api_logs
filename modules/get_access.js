@@ -5,7 +5,7 @@ var UserApi   = require('../models/userapi.model');
 
 var get_access = function(username, callback){
   var query = {username: username};
-  
+
   UserApi.find(query)
   .exec()
   .then(function(doc){
@@ -16,11 +16,11 @@ var get_access = function(username, callback){
         callback("user found", doc, true);
       }
     }else{
-        callback("no user with name " + username, {}, false);
+        callback("no user with name " + username, [], false);
     }
   })
   .catch(function(err){
-    callback("Error querying database", {}, false);
+    callback("Error querying database", [], false);
     console.log(err);
   });
 };

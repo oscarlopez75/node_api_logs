@@ -5,13 +5,13 @@ var checkToken = function(token, callback){
   try {
     jwt.verify(token, process.env.JWT_SECRET, function(error, decoded){
         if(error){
-          callback(error, false);
+          callback(error.message, false);
         }else{
           callback(decoded, true);
         }
-    });    
+    });
   } catch (err) {
-    callback(err, false);
+    callback("Error verifying the token", false);
   }
 };
 

@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 
-const server = '127.0.0.1:27017'; // DB SERVER
+const server = process.env.DB_USER + ':' + process.env.DB_PASS + '@ds261929.mlab.com:61929'; // DB SERVER
 const database = 'client'; // YOUR DB NAME
 
 class Database {

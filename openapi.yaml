@@ -1,0 +1,98 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Oscar APIs
+# during dev, should point to your local machine
+host: localhost:8081
+# basePath prefixes all resource paths
+basePath: /
+#
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /getlogs:
+    get:
+      description: Return the logs in the server
+      operationId: getlogs
+      parameters:
+        - name: authorization
+          in: header
+          required: true
+          description: user token
+          type: string
+      responses:
+        "200":
+          description: Logs
+          schema:
+            $ref: "#/definitions/ServerLogs"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /getusers:
+    get:
+      description: Return the users in the server
+      operationId: getusers
+      parameters:
+        - name: authorization
+          in: header
+          required: true
+          description: user token
+          type: string
+      responses:
+        "200":
+          description: Users
+          schema:
+            $ref: "#/definitions/ServerUsers"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+
+  ServerLogs:
+    type: object
+    properties:
+      user:
+        type: string
+        description: User name
+      cleared:
+        type: boolean
+        description: Clear
+      logs:
+        type: array
+        items:
+          type: object
+        description: logs
+
+  ServerUsers:
+    type: object
+    properties:
+      user:
+        type: string
+        description: User name
+      users:
+        type: array
+        items:
+          type: object
+        description: users
+
+  ErrorResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        description: Error message
