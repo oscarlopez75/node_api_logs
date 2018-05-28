@@ -12,7 +12,7 @@ class Database {
   _connect() {
      mongoose.connect("mongodb://" + server + "/" + database)
        .then(() => {
-         console.log('Connection to ' + server + "/" + database +  ' successful')
+         console.log('Connection to ' + database +  ' DB successful')
        })
        .catch(err => {
          console.error('Database connection error');
