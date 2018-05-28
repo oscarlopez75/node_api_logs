@@ -22,7 +22,7 @@ router.get('/getlogs', (req, res) => {
       if( req.hasOwnProperty('headers') && req.headers.hasOwnProperty('authorization') ){
         checkToken.checkToken(req.headers['authorization'], function(mess, resp){
             if (resp){
-              getLogs.get_all_logs(mess.username, function(cleared,result){
+              getLogs.get_all_logs(mess.login, function(cleared,result){
                 if(cleared){
                   res.status(200).json({
                     user: mess.username,
@@ -62,7 +62,7 @@ router.get('/getusers', (req, res) => {
       if( req.hasOwnProperty('headers') && req.headers.hasOwnProperty('authorization') ){
         checkToken.checkToken(req.headers['authorization'], function(mess, resp){
           if (resp){
-            getUsers.get_all_users(mess.username, function(cleared,result){
+            getUsers.get_all_users(mess.login, function(cleared,result){
               if(cleared){
                 res.status(200).json({
                   user: mess.username,

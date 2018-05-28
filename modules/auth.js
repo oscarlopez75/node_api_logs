@@ -6,7 +6,7 @@ var checkToken = function(token, callback){
     jwt.verify(token, process.env.JWT_SECRET, function(error, decoded){
         if(error){
           callback(error.message, false);
-        }else{
+        }else{          
           callback(decoded, true);
         }
     });
